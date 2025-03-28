@@ -1675,7 +1675,7 @@ button:focus{
 	display: block;
 	font-size: 30px;
 	line-height: 1.2em;
-	color: #36404b;
+	color: #ffffff;
 	font-weight: 500;
 	text-transform: uppercase;
 }
@@ -3617,6 +3617,7 @@ button:focus{
 .gallery-section{
 	position: relative;
 	padding: 115px 0 175px;
+	background-color: #222222;
 }
 
 .mixitup-gallery .filters{
