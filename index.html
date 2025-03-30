@@ -1519,7 +1519,7 @@
               With every purchase of an a elite package will recieve a free
               vehicle detail !
             </h3>
-            <a href="#" class="call-btn">Order Now</a>
+            <a href="appointment.html" class="call-btn">Order Now</a>
           </div>
         </div>
       </section>
@@ -1613,10 +1613,10 @@
           </div>
 
           <div class="contact-form">
-            <form method="post" action="index.html" id="contact-form">
+            <form id="contact-form">
               <div class="row clearfix">
                 <div class="col-lg-6 col-md-12 col-sm-12 form-group pull-right">
-                  <textarea name="message" placeholder="Message"></textarea>
+                  <textarea name="message" placeholder="*Message"></textarea>
                 </div>
 
                 <div class="col-lg-6 col-md-12 col-sm-12">
@@ -1625,7 +1625,7 @@
                       <input
                         type="text"
                         name="username"
-                        placeholder="Name"
+                        placeholder="*Name"
                         required=""
                       />
                     </div>
@@ -1634,7 +1634,7 @@
                       <input
                         type="email"
                         name="email"
-                        placeholder="Email"
+                        placeholder="*Email"
                         required=""
                       />
                     </div>
@@ -1643,7 +1643,7 @@
                       <input
                         type="tel"
                         name="phone"
-                        placeholder="Phone No"
+                        placeholder="*Phone No"
                         required=""
                       />
                     </div>
@@ -1652,7 +1652,7 @@
                       <input
                         type="text"
                         name="subject"
-                        placeholder="Email"
+                        placeholder="*Subject"
                         required=""
                       />
                     </div>
@@ -1665,6 +1665,32 @@
               </div>
             </form>
           </div>
+
+          <!-- JS script for google spreadsheets -->
+          <script>
+            document
+              .getElementById("contact-form")
+              .addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                const formData = new FormData(this);
+
+                fetch(
+                  "https://script.google.com/macros/s/AKfycbwzL2-PMiOhLYnwzTXDo6trFXwH0ucSoprnV5_Lzbj__W49o55ukROAra9IFlRCgBve/exec",
+                  {
+                    method: "POST",
+                    body: formData,
+                  }
+                )
+                  .then((response) => response.text())
+                  .then((data) => {
+                    alert("Form Submitted Successfully!");
+                    document.getElementById("contact-form").reset();
+                  })
+                  .catch((error) => console.error("Error:", error));
+              });
+          </script>
+          <!-- /JS script for google spreadsheets -->
 
           <div class="contact-info">
             <div class="row clearfix">
@@ -1861,7 +1887,7 @@
               <div class="footer-column col-lg-3 col-md-6 col-sm-12">
                 <!--Footer Column-->
                 <div class="footer-widget gallery-widget">
-                  <h2 class="widget-title">Instragram</h2>
+                  <h2 class="widget-title">Instagram</h2>
                   <!--Footer Column-->
                   <div class="widget-content">
                     <div class="outer clearfix">
