@@ -650,9 +650,9 @@
 	if($('.vehicle-year-slider').length){
 		$( ".vehicle-year-slider" ).slider({
 			range: true,
-			min: 0,
-			max: 3000,
-			values: [ 100, 2025 ],
+			min: 1885,
+			max: 2025,
+			values: [ 1885, 2025 ],
 			slide: function( event, ui ) {
 			$( "input.property-amount" ).val( ui.values[ 1 ] );
 			}
