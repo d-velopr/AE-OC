@@ -1616,6 +1616,7 @@
             </div>
           </div>
 
+          <!-- Contact form-->
           <div class="contact-form">
             <form id="contact-form">
               <div class="row clearfix">
@@ -1662,7 +1663,7 @@
                     </div>
 
                     <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                      <button type="submit" name="submit-form">Submit</button>
+                      <button type="submit">Submit</button>
                     </div>
                   </div>
                 </div>
@@ -1670,7 +1671,7 @@
             </form>
           </div>
 
-          <!-- JS script for google spreadsheets -->
+          <!-- JS script for Google Sheets -->
           <script>
             document
               .getElementById("contact-form")
@@ -1680,7 +1681,7 @@
                 const formData = new FormData(this);
 
                 fetch(
-                  "https://script.google.com/macros/s/AKfycbwzL2-PMiOhLYnwzTXDo6trFXwH0ucSoprnV5_Lzbj__W49o55ukROAra9IFlRCgBve/exec",
+                  "https://script.google.com/macros/s/AKfycbxpjIGQoD6O5WbQSvalzsKKtijcAEpOWAxdr_SZT57gy04mXJ0dbzgpKLpSjXHyPsCx3w/exec",
                   {
                     method: "POST",
                     body: formData,
@@ -1694,6 +1695,7 @@
                   .catch((error) => console.error("Error:", error));
               });
           </script>
+
           <!-- /JS script for google spreadsheets -->
 
           <div class="contact-info">
