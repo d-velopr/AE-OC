@@ -668,6 +668,7 @@
               <div class="services-needed">
                 <div class="title"><h3>Select Services Needed</h3></div>
                 <div class="row clearfix">
+                  <!-- Checkbox items... -->
                   <!-- Repeatable block -->
                   <div class="form-group col-lg-3 col-md-4 col-sm-6 col-xs-12">
                     <div class="check-box">
@@ -677,7 +678,7 @@
                         value="Classic Bass Package"
                         id="service-1"
                       />
-                      <label for="service-1">Classic Bass Package</label>
+                      <label for="service-1">Kit Level 1</label>
                     </div>
                   </div>
 
@@ -689,7 +690,7 @@
                         value="Signature Glow Package"
                         id="service-2"
                       />
-                      <label for="service-2">Signature Glow Package</label>
+                      <label for="service-2">Kit Level 2</label>
                     </div>
                   </div>
 
@@ -701,7 +702,7 @@
                         value="Elite Grill Package"
                         id="service-3"
                       />
-                      <label for="service-3">Elite Grill Package</label>
+                      <label for="service-3">Kit Level 2+</label>
                     </div>
                   </div>
 
@@ -713,7 +714,7 @@
                         value="Elite Crystal Package"
                         id="service-4"
                       />
-                      <label for="service-4">Elite Crystal Package</label>
+                      <label for="service-4">Kit Level 3</label>
                     </div>
                   </div>
 
@@ -731,67 +732,8 @@
                 </div>
               </div>
 
-              <div class="form-group">
-                <button type="submit">Submit Appointment</button>
-              </div>
-            </form>
-          </div>
-
-          <script>
-            document
-              .getElementById("appointment-form")
-              .addEventListener("submit", function (e) {
-                e.preventDefault();
-
-                const form = e.target;
-                const formData = new FormData();
-
-                formData.append("vehicle_year", form.vehicle_year.value);
-                formData.append("vehicle_make", form.vehicle_make.value);
-                formData.append("vehicle_model", form.vehicle_model.value);
-                formData.append(
-                  "appointment_date",
-                  form.appointment_date.value
-                );
-                formData.append(
-                  "appointment_time",
-                  form.appointment_time.value
-                );
-
-                // Gather all checked services
-                const services = [];
-                document
-                  .querySelectorAll("input[name='services']:checked")
-                  .forEach((box) => {
-                    services.push(box.value);
-                  });
-                formData.append("services", services.join(", "));
-
-                // Replace with your actual Google Apps Script Web App URL
-                fetch(
-                  "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec",
-                  {
-                    method: "POST",
-                    body: formData,
-                  }
-                )
-                  .then((res) => res.text())
-                  .then((msg) => {
-                    alert("Appointment submitted!");
-                    form.reset();
-                  })
-                  .catch((err) => {
-                    console.error("Error:", err);
-                    alert("Submission failed.");
-                  });
-              });
-          </script>
-          <!--End Appointment Form-->
-
-          <!--Contact Form-->
-          <div class="contact-form">
-            <div class="title"><h3>Contact Details</h3></div>
-            <form>
+              <!-- Contact Info -->
+              <div class="title"><h3>Contact Details</h3></div>
               <div class="row clearfix">
                 <div class="form-group col-md-4 col-sm-6 col-xs-12">
                   <input
@@ -812,27 +754,81 @@
                 <div class="form-group col-md-4 col-sm-12 col-xs-12">
                   <input
                     type="text"
-                    name="subject"
+                    name="phone"
                     placeholder="Enter Your Phone Number"
                   />
                 </div>
 
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                   <textarea
+                    name="message"
                     placeholder="Additional Questions or Comments"
                   ></textarea>
                 </div>
-
-                <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                  <button type="submit" class="theme-btn">Submit Now</button>
-                </div>
               </div>
+
+              <!-- Submit -->
+              <div class="form-group col-sm-12 col-xs-12">
+                <button type="submit" class="theme-btn">
+                  Submit Appointment
+                </button>
+              </div>
+              <!-- End Submit -->
             </form>
           </div>
-          <!--End Contact Form-->
+          <!--End Appointment Form-->
         </div>
       </div>
       <!--End Appointment Page-->
+
+      <!-- Google Data Handling -->
+      <script>
+        document
+          .getElementById("appointment-form")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+            const form = e.target;
+            const formData = new FormData();
+
+            // Vehicle Info
+            formData.append("vehicle_year", form.vehicle_year.value);
+            formData.append("vehicle_make", form.vehicle_make.value);
+            formData.append("vehicle_model", form.vehicle_model.value);
+            formData.append("appointment_date", form.appointment_date.value);
+            formData.append("appointment_time", form.appointment_time.value);
+
+            // Services
+            const services = [];
+            document
+              .querySelectorAll("input[name='services']:checked")
+              .forEach((box) => {
+                services.push(box.value);
+              });
+            formData.append("services", services.join(", "));
+
+            // Contact Info
+            formData.append("name", form.name.value);
+            formData.append("email", form.email.value);
+            formData.append("phone", form.phone.value);
+            formData.append("message", form.message.value);
+
+            // Send to Google Script
+            fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
+              method: "POST",
+              body: formData,
+            })
+              .then((res) => res.text())
+              .then((msg) => {
+                alert("Appointment submitted!");
+                form.reset();
+              })
+              .catch((err) => {
+                console.error("Error:", err);
+                alert("Submission failed.");
+              });
+          });
+      </script>
+      <!-- End Google Data Handling -->
 
       <!-- Subscribe Section -->
       <section class="subscribe-section">
