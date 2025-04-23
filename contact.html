@@ -552,11 +552,16 @@
             </div>
           </div>
 
+          <!-- Updated Contact Form -->
           <div class="contact-form">
-            <form method="post" action="sendemail.php" id="contact-form">
+            <form id="contact-form">
               <div class="row clearfix">
                 <div class="col-lg-6 col-md-12 col-sm-12 form-group pull-right">
-                  <textarea name="message" placeholder="Message"></textarea>
+                  <textarea
+                    name="message"
+                    placeholder="Message"
+                    required
+                  ></textarea>
                 </div>
 
                 <div class="col-lg-6 col-md-12 col-sm-12">
@@ -566,7 +571,7 @@
                         type="text"
                         name="username"
                         placeholder="Name"
-                        required=""
+                        required
                       />
                     </div>
 
@@ -575,7 +580,7 @@
                         type="email"
                         name="email"
                         placeholder="Email"
-                        required=""
+                        required
                       />
                     </div>
 
@@ -584,7 +589,7 @@
                         type="text"
                         name="phone"
                         placeholder="Phone No"
-                        required=""
+                        required
                       />
                     </div>
 
@@ -592,13 +597,13 @@
                       <input
                         type="text"
                         name="subject"
-                        placeholder="Subject"
-                        required=""
+                        placeholder="Year/Make/Model"
+                        required
                       />
                     </div>
 
                     <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                      <button type="submit" name="submit-form">
+                      <button type="submit" class="theme-btn">
                         Send Message
                       </button>
                     </div>
@@ -647,6 +652,32 @@
         </div>
       </section>
       <!-- Contact Section -->
+
+      <script>
+        document
+          .getElementById("contact-form")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+
+            fetch(
+              "https://script.google.com/macros/s/AKfycbxDXpZmNTgnvFlNxPuWNRU7hrXfkjDxdX14GZQWpXBEx1OPiUiq9jNwVn6Oyp-hadI8/exec",
+              {
+                method: "POST",
+                body: formData,
+              }
+            )
+              .then((response) => response.text())
+              .then((data) => {
+                alert("Form Submitted Successfully!");
+                document.getElementById("contact-form").reset();
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+                alert("Submission failed.");
+              });
+          });
+      </script>
 
       <!-- Contact Map Section -->
       <section class="contact-map-section">
