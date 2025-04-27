@@ -709,7 +709,7 @@
                 <div class="form-group col-md-4 col-sm-6 col-xs-12">
                   <input
                     type="text"
-                    name="name"
+                    name="username"
                     placeholder="Enter Your Name"
                   />
                 </div>
@@ -777,14 +777,14 @@
             formData.append("services", services.join(", "));
 
             // Contact Info
-            formData.append("name", form.name.value);
+            formData.append("username", form.username.value);
             formData.append("email", form.email.value);
             formData.append("phone", form.phone.value);
             formData.append("message", form.message.value);
 
             // Send to Google Script
             fetch(
-              "https://script.google.com/macros/s/AKfycbxDXpZmNTgnvFlNxPuWNRU7hrXfkjDxdX14GZQWpXBEx1OPiUiq9jNwVn6Oyp-hadI8/exec",
+              "https://script.google.com/macros/s/AKfycbzP1tzaYoghB-QBkY2xRpVBA_KYlp27XVyqKP_s2j29bsdgWsMe-jWQozoY05hBbYcd2g/exec",
               {
                 method: "POST",
                 body: formData,
