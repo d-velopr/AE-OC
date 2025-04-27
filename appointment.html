@@ -198,7 +198,9 @@
                         <a href="#">Project Gallery</a>
                         <ul>
                           <li><a href="project.html">All Projects</a></li>
-                          <li><a href="project.html">Recent Projects</a></li>
+                          <li>
+                            <a href="project-recent.html">Recent Projects</a>
+                          </li>
                         </ul>
                       </li>
                       <li class="dropdown">
@@ -406,7 +408,7 @@
                       <ul>
                         <li><a href="project.html">All Projects</a></li>
                         <li>
-                          <a href="project.html">Recent Projects</a>
+                          <a href="project-recent.html">Recent Projects</a>
                         </li>
                       </ul>
                     </li>
@@ -555,15 +557,16 @@
             </h2>
             <p>
               <strong
-                >Book a consultation appointment to discover our cutting-edge
-                audio solutions tailored <br />to your needs ; Whether it’s
-                sound design, installations, or custom setups .</strong
-              >
+                >Get A Free Consultation and Discover The Perfect Audio Solution
+                For
+                <br />
+                Your Needs - From Sound Design To Custom Setups !
+              </strong>
             </p>
           </div>
 
-          <!-- Service form-->
-          <div class="service-form">
+          <!-- Appointment-form-->
+          <div class="service-form contact-form">
             <form id="appointment-form">
               <div class="vehicle-detail">
                 <div class="row clearfix">
@@ -607,7 +610,7 @@
 
                   <!-- Appointment Date -->
                   <div class="form-group col-lg-6 col-md-4 col-sm-6 col-xs-12">
-                    <div class="title"><h3>Appointment Date</h3></div>
+                    <div class="title"><h3>Preferred Appointment Date</h3></div>
                     <div class="field-inner">
                       <input
                         type="text"
@@ -733,6 +736,7 @@
                     placeholder="Additional Questions or Comments"
                   ></textarea>
                 </div>
+
                 <!-- Submit -->
                 <div class="form-group col-sm-12 col-xs-12">
                   <button type="submit" class="theme-btn">
@@ -742,7 +746,7 @@
               </div>
             </form>
           </div>
-          <!--End Appointment Form-->
+          <!--End Appointment-Form-->
         </div>
       </div>
       <!--End Appointment Page-->
@@ -779,10 +783,13 @@
             formData.append("message", form.message.value);
 
             // Send to Google Script
-            fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
-              method: "POST",
-              body: formData,
-            })
+            fetch(
+              "https://script.google.com/macros/s/AKfycbxDXpZmNTgnvFlNxPuWNRU7hrXfkjDxdX14GZQWpXBEx1OPiUiq9jNwVn6Oyp-hadI8/exec",
+              {
+                method: "POST",
+                body: formData,
+              }
+            )
               .then((res) => res.text())
               .then((msg) => {
                 alert("Appointment submitted!");
@@ -798,12 +805,35 @@
 
       <!-- Subscribe Section -->
       <section class="subscribe-section">
-        <div class="auto-container">
-          <div class="inner-container clearfix">
-            <h3>
-              Your dream build starts here-claim your free online quote today !
-            </h3>
-            <a href="appointment.html" class="call-btn">Order Now</a>
+        <div class="inner-container">
+          <div class="auto-container row clearfix">
+            <!-- Contact Info Block -->
+            <div class="contact-info-block col-lg-4 col-md-6 col-sm-12">
+              <div class="inner-box">
+                <span class="icon flaticon-placeholder"></span>
+                <p>
+                  7442 Talbert Avenue <br />
+                  Huntington Beach , California
+                </p>
+              </div>
+            </div>
+            <!-- Contact Info Block -->
+            <div class="contact-info-block col-lg-4 col-md-6 col-sm-12">
+              <div class="inner-box">
+                <span class="icon flaticon-phone"></span>
+                <p>+1 (714) 848 - 8489</p>
+                <p><a href="#">customerservice@ae-hb.com</a></p>
+              </div>
+            </div>
+
+            <!-- Contact Info Block -->
+            <div class="contact-info-block col-lg-4 col-md-6 col-sm-12">
+              <div class="inner-box">
+                <span class="icon flaticon-stopwatch"></span>
+                <p>9:00am to 6:00pm</p>
+                <p>Sunday Closed</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
