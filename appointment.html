@@ -725,12 +725,14 @@
                   />
                 </div>
 
+                <!--
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                   <textarea
                     name="message"
                     placeholder="Additional Questions or Comments"
                   ></textarea>
                 </div>
+              -->
 
                 <!-- Submit -->
                 <div class="form-group col-sm-12 col-xs-12">
@@ -775,7 +777,7 @@
             formData.append("username", form.username.value);
             formData.append("email", form.email.value);
             formData.append("phone", form.phone.value);
-            formData.append("message", form.message.value);
+            // formData.append("message", form.message.value); // Message Box
 
             // Send to Google Script
             fetch(
