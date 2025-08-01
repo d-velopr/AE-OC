@@ -276,6 +276,13 @@ ul,li{
 	color:#ffffff;
 }
 
+.total-price {
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
 /*Btn Style One*/
 
 .btn-style-one{
