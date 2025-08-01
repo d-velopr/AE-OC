@@ -556,7 +556,7 @@
                     <div class="info-column col-lg-7 col-md-12 col-sm-12">
                       <div class="inner-column">
                         <div class="details-header">
-                          <h4>Hummer EV Sub-Woofer</h4>
+                          <h4>Hummer EV Sub-Woofer Box</h4>
                           <div class="item-price" id="itemPrice">
                             <del>$1350.00</del> $1249.99
                           </div>
@@ -905,6 +905,19 @@
                       <strong>Total:</strong>
                       <span id="bundleTotal">$0.00</span>
                     </div>
+                    <!-- Add to Cart Button -->
+                    <div style="text-align: center; margin-top: 15px">
+                      <button
+                        onclick="addBundleToMainPrice()"
+                        class="theme-btn btn-style-two"
+                      >
+                        Add to Cart
+                      </button>
+                      <p
+                        id="cartMessage"
+                        style="margin-top: 10px; text-align: center"
+                      ></p>
+                    </div>
                   </div>
                 </div>
               </aside>
@@ -1093,6 +1106,9 @@
         HUMMER10: "https://buy.stripe.com/fZucN561P4NY6ee40u2Ji05", // Replace with your actual promo link
       };
 
+      let promoApplied = false;
+      let currentMainPrice = 1249.99;
+
       // Set the default behavior on page load
       window.onload = function () {
         const buyBtn = document.getElementById("buyNowBtn");
@@ -1109,37 +1125,37 @@
         const itemPrice = document.getElementById("itemPrice");
 
         if (validPromoCodes[input]) {
+          promoApplied = true;
+          currentMainPrice = 949.99;
+
           message.textContent = "✅ Promo Code Accepted!";
           message.style.color = "green";
-
-          // Change the price display
           itemPrice.innerHTML = "<del>$1350.00</del> $949.99";
 
-          // Redirect to promo price
           buyBtn.onclick = () => {
             window.location.href = validPromoCodes[input];
           };
         } else {
           if (input === "") {
+            promoApplied = false;
+            currentMainPrice = 1249.99;
+
             message.textContent =
               "No promo code entered. Proceeding with default link.";
             message.style.color = "gray";
-
-            // Reset the price
             itemPrice.innerHTML = "<del>$1350.00</del> $1249.99";
 
-            // Use default link
             buyBtn.onclick = () => {
               window.location.href = defaultLink;
             };
           } else {
+            promoApplied = false;
+            currentMainPrice = 1249.99;
+
             message.textContent = "❌ Invalid Promo Code";
             message.style.color = "red";
-
-            // Reset the price
             itemPrice.innerHTML = "<del>$1350.00</del> $1249.99";
 
-            // Block purchase
             buyBtn.onclick = () => {
               alert("Invalid promo code. Please try again.");
             };
@@ -1162,6 +1178,25 @@
           2
         )}`;
       });
+    </script>
+
+    <script>
+      function addBundleToMainPrice() {
+        const bundleTotalText =
+          document.getElementById("bundleTotal").textContent;
+        const itemPrice = document.getElementById("itemPrice");
+        const cartMessage = document.getElementById("cartMessage");
+
+        const bundleTotal = parseFloat(bundleTotalText.replace(/[^0-9.]/g, ""));
+        const combinedTotal = currentMainPrice + bundleTotal;
+
+        itemPrice.innerHTML = `<del>$1350.00</del> $${combinedTotal.toFixed(
+          2
+        )}`;
+
+        cartMessage.textContent = "✅ Bundle price added to cart.";
+        cartMessage.style.color = "green";
+      }
     </script>
   </body>
 </html>
