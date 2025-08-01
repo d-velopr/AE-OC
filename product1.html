@@ -557,8 +557,8 @@
                       <div class="inner-column">
                         <div class="details-header">
                           <h4>Hummer EV Sub-Woofer</h4>
-                          <div class="item-price">
-                            <del>$129.00</del> $79.00
+                          <div class="item-price" id="itemPrice">
+                            <del>$1350.00</del> $1249.99
                           </div>
                           <div class="rating">
                             <span class="fa fa-star"></span
@@ -579,6 +579,19 @@
                           upgrade for any Hummer EV audio enthusiast.
                         </div>
                         <div class="clearfix">
+                          <!-- Promo Code Input -->
+                          <div class="promo-code-section">
+                            <input
+                              type="text"
+                              id="promoCode"
+                              placeholder="Enter Promo Code..."
+                            />
+                            <button class="apply-btn" onclick="applyPromo()">
+                              Apply
+                            </button>
+                            <p id="promoMessage"></p>
+                          </div>
+                          <br />
                           <button
                             id="buyNowBtn"
                             type="button"
@@ -827,20 +840,6 @@
                     </li>
                   </ul>
                 </div>
-
-                <!-- Promo Code Input -->
-                <div class="promo-code-section">
-                  <label for="promoCode">Enter Promo Code:</label>
-                  <input
-                    type="text"
-                    id="promoCode"
-                    placeholder="Enter code..."
-                  />
-                  <button onclick="applyPromo()">Apply</button>
-                  <p id="promoMessage"></p>
-                </div>
-
-                <br />
 
                 <!-- Top Related Posts -->
                 <div class="sidebar-widget related-posts">
@@ -1106,12 +1105,16 @@
           .toUpperCase();
         const message = document.getElementById("promoMessage");
         const buyBtn = document.getElementById("buyNowBtn");
+        const itemPrice = document.getElementById("itemPrice");
 
         if (validPromoCodes[input]) {
           message.textContent = "✅ Promo Code Accepted!";
           message.style.color = "green";
 
-          // Override Buy Now to go to promo link
+          // Change the price display
+          itemPrice.innerHTML = "<del>$1350.00</del> $949.99";
+
+          // Redirect to promo price
           buyBtn.onclick = () => {
             window.location.href = validPromoCodes[input];
           };
@@ -1121,7 +1124,10 @@
               "No promo code entered. Proceeding with default link.";
             message.style.color = "gray";
 
-            // Revert Buy Now to default link
+            // Reset the price
+            itemPrice.innerHTML = "<del>$1350.00</del> $1249.99";
+
+            // Use default link
             buyBtn.onclick = () => {
               window.location.href = defaultLink;
             };
@@ -1129,7 +1135,10 @@
             message.textContent = "❌ Invalid Promo Code";
             message.style.color = "red";
 
-            // Prevent redirection or show alert
+            // Reset the price
+            itemPrice.innerHTML = "<del>$1350.00</del> $1249.99";
+
+            // Block purchase
             buyBtn.onclick = () => {
               alert("Invalid promo code. Please try again.");
             };
