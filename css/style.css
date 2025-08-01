@@ -3863,6 +3863,48 @@ button:focus{
 /***
 
 ====================================================================
+					Popup-overlay
+====================================================================
+
+***/
+/* Modal Popup Styles */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+.promo-code-section {
+  margin-top: 20px;
+}
+
+.promo-code-section input {
+  padding: 8px;
+  margin-right: 10px;
+  width: 200px;
+}
+
+.promo-code-section button {
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+#promoMessage {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+
+/***
+
+====================================================================
 					Project Section
 ====================================================================
 
