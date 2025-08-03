@@ -558,7 +558,7 @@
                         <div class="details-header">
                           <h4>Hummer EV Sub-Woofer Box</h4>
                           <div class="item-price" id="itemPrice">
-                            <del>$1350.00</del> $1249.99
+                            <del>$1350.00</del> $1186.99
                           </div>
                           <div class="rating">
                             <span class="fa fa-star"></span
@@ -1101,13 +1101,13 @@
 
     <script>
       // Default and promo links
-      const defaultLink = "https://buy.stripe.com/00wfZhgGt0xIfOOaoS2Ji04"; // Replace with your real default link
+      const defaultLink = "https://buy.stripe.com/3cI3cv89X94eauu9kO2Ji06"; // Replace with your real default link
       const validPromoCodes = {
-        HUMMER10: "https://buy.stripe.com/fZucN561P4NY6ee40u2Ji05", // Replace with your actual promo link
+        HUMMER20: "https://buy.stripe.com/00w7sL89Xbcmauu7cG2Ji07", // Replace with your actual promo link
       };
 
       let promoApplied = false;
-      let currentMainPrice = 1249.99;
+      let currentMainPrice = 1186.99;
 
       // Set the default behavior on page load
       window.onload = function () {
@@ -1138,23 +1138,23 @@
         } else {
           if (input === "") {
             promoApplied = false;
-            currentMainPrice = 1249.99;
+            currentMainPrice = 11866.99;
 
             message.textContent =
               "No promo code entered. Proceeding with default link.";
             message.style.color = "gray";
-            itemPrice.innerHTML = "<del>$1350.00</del> $1249.99";
+            itemPrice.innerHTML = "<del>$1350.00</del> $1186.99";
 
             buyBtn.onclick = () => {
               window.location.href = defaultLink;
             };
           } else {
             promoApplied = false;
-            currentMainPrice = 1249.99;
+            currentMainPrice = 1186.99;
 
             message.textContent = "❌ Invalid Promo Code";
             message.style.color = "red";
-            itemPrice.innerHTML = "<del>$1350.00</del> $1249.99";
+            itemPrice.innerHTML = "<del>$1350.00</del> $1186.99";
 
             buyBtn.onclick = () => {
               alert("Invalid promo code. Please try again.");
