@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Automotive Entertainment OC | Hummer EV Subwoofer</title>
+    <title>Automotive Entertainment OC | Hummer EV Sub-woofer Box</title>
 
     <!-- Stylesheets -->
     <link href="css/bootstrap.css" rel="stylesheet" />
@@ -102,10 +102,6 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
-    <!--[if lt IE 9
-      ]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script
-    ><![endif]-->
-    <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
   </head>
 
   <body>
@@ -534,13 +530,14 @@
       </section>
       <!--End Page Title-->
 
-      <!--Shop Single-->
+      <!--Product + Reviews Container-->
       <div class="sidebar-page-container">
         <div class="auto-container">
           <div class="row clearfix">
+            <!--LEFT SIDE OF PAGE (PRODUCT + REVIEWS)-->
             <div class="content-column col-lg-9 col-md-12 col-sm-12">
               <div class="product-details">
-                <!--Basic Details-->
+                <!--Product + Details-->
                 <div class="basic-details">
                   <div class="row clearfix">
                     <div class="image-column col-lg-5 col-md-12 col-sm-12">
@@ -604,9 +601,9 @@
                     </div>
                   </div>
                 </div>
-                <!--Basic Details-->
+                <!--End Product + Details-->
 
-                <!--Product Info Tabs-->
+                <!--Reviews Section-->
                 <div class="product-info-tabs">
                   <!--Product Tabs-->
                   <div class="prod-tabs tabs-box" id="product-tabs">
@@ -794,11 +791,11 @@
                     </div>
                   </div>
                 </div>
-                <!-- End product info tabs -->
+                <!--End Reviews Section-->
               </div>
             </div>
 
-            <!--Sidebar Side-->
+            <!--RIGHT SIDE OF PAGE (KITS + FBT PRODUCTS)-->
             <div class="sidebar-side col-lg-3 col-md-12 col-sm-12">
               <aside class="sidebar default-sidebar">
                 <!--search box-->
@@ -819,7 +816,7 @@
                   </form>
                 </div>
 
-                <!-- Categories -->
+                <!-- Kit Packages -->
                 <div class="sidebar-widget categories">
                   <div class="sidebar-title"><h2>Kit Packages</h2></div>
                   <ul class="category-list">
@@ -841,7 +838,7 @@
                   </ul>
                 </div>
 
-                <!-- Popular Products Purchased Together -->
+                <!-- Frequently Bought Together Products -->
                 <div class="sidebar-widget related-posts">
                   <div class="sidebar-title">
                     <h2>Frequently Bought Together</h2>
@@ -854,7 +851,7 @@
                           ><img src="images/products/hbaamp.jpg" alt=""
                         /></a>
                       </figure>
-                      <h4><a href="shop-detail.html">HB-Automotive Amp</a></h4>
+                      <h4>HB-Automotive Amp</h4>
                       <div class="rating">
                         <span class="fa fa-star"></span
                         ><span class="fa fa-star"></span
@@ -872,7 +869,7 @@
                           ><img src="images/products/wiring.jpg" alt=""
                         /></a>
                       </figure>
-                      <h4><a href="shop-detail.html">Wiring</a></h4>
+                      <h4>Wiring</h4>
                       <div class="rating">
                         <span class="fa fa-star"></span
                         ><span class="fa fa-star"></span
@@ -890,7 +887,7 @@
                           ><img src="images/products/jblsub.jpg" alt=""
                         /></a>
                       </figure>
-                      <h4><a href="shop-detail.html">JBL Subwoofer</a></h4>
+                      <h4>JBL Subwoofer</h4>
                       <div class="rating">
                         <span class="fa fa-star"></span
                         ><span class="fa fa-star"></span
@@ -908,10 +905,10 @@
                     <!-- Add to Cart Button -->
                     <div style="text-align: center; margin-top: 15px">
                       <button
-                        onclick="addBundleToMainPrice()"
+                        onclick="toggleBundlePrice()"
                         class="theme-btn btn-style-two"
                       >
-                        Add to Cart
+                        Add to PRICE
                       </button>
                       <p
                         id="cartMessage"
@@ -939,7 +936,6 @@
         </div>
       </section>
       <!-- End Subscribe Section -->
-
       <!-- Main Footer -->
       <footer
         class="main-footer"
@@ -1099,21 +1095,61 @@
     <script src="js/script.js"></script>
     <script src="js/color-settings.js"></script>
 
+    <!--Promo Code Script-->
     <script>
       // Default and promo links
-      const defaultLink = "https://buy.stripe.com/3cI3cv89X94eauu9kO2Ji06"; // Replace with your real default link
-      const validPromoCodes = {
-        HUMMER20: "https://buy.stripe.com/00w7sL89Xbcmauu7cG2Ji07", // Replace with your actual promo link
+      // Stripe Links Based on Price Conditions
+      const defaultLink = "https://buy.stripe.com/3cI3cv89X94eauu9kO2Ji06"; // $1,186.99 (Default)
+      const promoLinks = {
+        HUMMER20: "https://buy.stripe.com/00w7sL89Xbcmauu7cG2Ji07", // $949.99 (Promo Price)
       };
+      const bundleLink_1656 = "https://buy.stripe.com/aFa3cv75TfsC8mmaoS2Ji08"; // $1,656.96 = Promo + Bundle
+      const bundleLink_1893 = "https://buy.stripe.com/aFabJ1eyl0xIauu2Wq2Ji09"; // $1,893.96 = Base + Bundle
+      const bundleLink_12573 = "https://buy.stripe.com/XYZ"; // $12,573.96 (if needed)
 
       let promoApplied = false;
-      let currentMainPrice = 1186.99;
+      let bundleAdded = false;
 
-      // Set the default behavior on page load
-      window.onload = function () {
+      const basePrice = 1186.99;
+      const promoPrice = 949.99;
+      const originalDel = "<del>$1350.00</del>";
+
+      // Update BUY NOW button behavior based on current price
+      function updateBuyNowLink(total) {
         const buyBtn = document.getElementById("buyNowBtn");
-        buyBtn.onclick = () => (window.location.href = defaultLink);
-      };
+        const roundedTotal = total.toFixed(2);
+
+        switch (roundedTotal) {
+          case "1186.99":
+            buyBtn.onclick = () => (window.location.href = defaultLink);
+            break;
+          case "1656.96":
+            buyBtn.onclick = () => (window.location.href = bundleLink_1656);
+            break;
+          case "12573.96":
+            buyBtn.onclick = () => (window.location.href = bundleLink_12573);
+            break;
+          case "1893.96":
+            buyBtn.onclick = () => (window.location.href = bundleLink_1893);
+            break;
+          case "949.99":
+            buyBtn.onclick = () =>
+              (window.location.href = promoLinks["HUMMER20"]);
+            break;
+          default:
+            // Fallback: use promo if it's active, otherwise default
+            buyBtn.onclick = () =>
+              (window.location.href = promoApplied
+                ? promoLinks["HUMMER20"]
+                : defaultLink);
+        }
+      }
+
+      function updatePriceDisplay(total) {
+        const itemPrice = document.getElementById("itemPrice");
+        itemPrice.innerHTML = `${originalDel} $${total.toFixed(2)}`;
+        updateBuyNowLink(total);
+      }
 
       function applyPromo() {
         const input = document
@@ -1121,47 +1157,52 @@
           .value.trim()
           .toUpperCase();
         const message = document.getElementById("promoMessage");
-        const buyBtn = document.getElementById("buyNowBtn");
-        const itemPrice = document.getElementById("itemPrice");
 
-        if (validPromoCodes[input]) {
-          promoApplied = true;
-          currentMainPrice = 949.99;
+        const base = promoLinks[input] ? promoPrice : basePrice;
+        promoApplied = !!promoLinks[input];
 
+        const bundleTotal = bundleAdded ? getBundleTotal() : 0;
+        const total = base + bundleTotal;
+
+        updatePriceDisplay(total);
+
+        if (promoApplied) {
           message.textContent = "✅ Promo Code Accepted!";
           message.style.color = "green";
-          itemPrice.innerHTML = "<del>$1350.00</del> $949.99";
-
-          buyBtn.onclick = () => {
-            window.location.href = validPromoCodes[input];
-          };
         } else {
-          if (input === "") {
-            promoApplied = false;
-            currentMainPrice = 11866.99;
-
-            message.textContent =
-              "No promo code entered. Proceeding with default link.";
-            message.style.color = "gray";
-            itemPrice.innerHTML = "<del>$1350.00</del> $1186.99";
-
-            buyBtn.onclick = () => {
-              window.location.href = defaultLink;
-            };
-          } else {
-            promoApplied = false;
-            currentMainPrice = 1186.99;
-
-            message.textContent = "❌ Invalid Promo Code";
-            message.style.color = "red";
-            itemPrice.innerHTML = "<del>$1350.00</del> $1186.99";
-
-            buyBtn.onclick = () => {
-              alert("Invalid promo code. Please try again.");
-            };
-          }
+          message.textContent =
+            input === "" ? "No promo code entered." : "❌ Invalid Promo Code";
+          message.style.color = input === "" ? "gray" : "red";
         }
       }
+
+      function getBundleTotal() {
+        const bundleText =
+          document.getElementById("bundleTotal").textContent || "0";
+        return parseFloat(bundleText.replace(/[^0-9.]/g, "")) || 0;
+      }
+
+      function toggleBundlePrice() {
+        const cartMessage = document.getElementById("cartMessage");
+        bundleAdded = !bundleAdded;
+
+        const base = promoApplied ? promoPrice : basePrice;
+        const bundleTotal = bundleAdded ? getBundleTotal() : 0;
+        const total = base + bundleTotal;
+
+        updatePriceDisplay(total);
+
+        cartMessage.textContent = bundleAdded
+          ? "✅ Bundle price added to cart."
+          : "❌ Bundle price removed from cart.";
+        cartMessage.style.color = bundleAdded ? "green" : "red";
+      }
+
+      // Set initial BUY NOW behavior on page load
+      document.addEventListener("DOMContentLoaded", () => {
+        const initialTotal = basePrice; // 1186.99
+        updatePriceDisplay(initialTotal);
+      });
     </script>
 
     <script>
@@ -1178,25 +1219,6 @@
           2
         )}`;
       });
-    </script>
-
-    <script>
-      function addBundleToMainPrice() {
-        const bundleTotalText =
-          document.getElementById("bundleTotal").textContent;
-        const itemPrice = document.getElementById("itemPrice");
-        const cartMessage = document.getElementById("cartMessage");
-
-        const bundleTotal = parseFloat(bundleTotalText.replace(/[^0-9.]/g, ""));
-        const combinedTotal = currentMainPrice + bundleTotal;
-
-        itemPrice.innerHTML = `<del>$1350.00</del> $${combinedTotal.toFixed(
-          2
-        )}`;
-
-        cartMessage.textContent = "✅ Bundle price added to cart.";
-        cartMessage.style.color = "green";
-      }
     </script>
   </body>
 </html>
