@@ -283,6 +283,14 @@ ul,li{
   text-align: center;
 }
 
+
+/* Put this in style.css */
+#product-popup.show {
+  display: flex !important;
+  animation: fadeIn 500ms ease-out forwards;
+}
+
+
 /*Btn Style One*/
 
 .btn-style-one{

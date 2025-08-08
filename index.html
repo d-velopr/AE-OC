@@ -123,6 +123,32 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
+
+    <!-- Social preview: Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://automotiveentertainmentoc.com/" />
+    <meta property="og:title" content="Automotive Entertainment OC" />
+    <meta
+      property="og:description"
+      content="Custom vehicle audio solutions in Huntington Beach."
+    />
+    <meta
+      property="og:image"
+      content="https://automotiveentertainmentoc.com/images/logo.png"
+    />
+    <meta property="og:image:alt" content="Automotive Entertainment OC logo" />
+
+    <!-- Social preview: Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Automotive Entertainment OC" />
+    <meta
+      name="twitter:description"
+      content="Custom vehicle audio solutions in Huntington Beach."
+    />
+    <meta
+      name="twitter:image"
+      content="https://automotiveentertainmentoc.com/images/logo.png"
+    />
   </head>
 
   <body>
@@ -1795,7 +1821,6 @@
           width: 100vw;
           height: 100vh;
           background-color: rgba(0, 0, 0, 0.6);
-          display: flex;
           align-items: center;
           justify-content: center;
         "
@@ -1844,18 +1869,6 @@
           >
         </div>
       </div>
-
-      <script>
-        window.onload = function () {
-          setTimeout(() => {
-            document.getElementById("product-popup").style.display = "flex";
-          }, 2500); // Show after 0.5s
-        };
-
-        function closePopup() {
-          document.getElementById("product-popup").style.display = "none";
-        }
-      </script>
 
       <!-- End Pop Up-->
 
@@ -2046,5 +2059,29 @@
     <script src="js/script.js"></script>
     <script src="js/map-script.js"></script>
     <script src="js/color-settings.js"></script>
+
+    <script>
+      (function () {
+        const modal = document.getElementById("product-popup");
+        const STORAGE_KEY = "aehb_modal_shown";
+
+        function openPopup() {
+          if (!modal || sessionStorage.getItem(STORAGE_KEY)) return;
+          modal.classList.add("show"); // uses CSS rule for display + fade
+          sessionStorage.setItem(STORAGE_KEY, "1"); // only once per session
+        }
+
+        window.closePopup = function () {
+          if (!modal) return;
+          modal.classList.remove("show");
+          modal.style.display = "none"; // belt + suspenders for AT/keyboard
+        };
+
+        // Show soon after load
+        window.addEventListener("DOMContentLoaded", function () {
+          setTimeout(openPopup, 4750); // <-- adjust to taste (e.g., 800–1500ms)
+        });
+      })();
+    </script>
   </body>
 </html>
