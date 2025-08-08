@@ -645,7 +645,7 @@
                       <!--Tab-->
                       <div class="tab active-tab" id="prod-reviews">
                         <!--Reviews Container-->
-                        <div class="reviews-container">
+                        <div class="reviews-container" id="reviewsContainer">
                           <!--Reviews-->
                           <article class="review-box clearfix">
                             <figure class="rev-thumb">
@@ -731,7 +731,7 @@
                           </article>
                         </div>
 
-                        <!-- Comment Form -->
+                        <!-- Reviews Form-->
                         <div class="shop-comment-form">
                           <h2>ADD A REVIEW</h2>
                           <div class="mail-text">
@@ -740,21 +740,27 @@
                             >
                             Required fields are marked*
                           </div>
-                          <div class="rating-box">
-                            <div class="text">Your Rating:</div>
-                            <div class="rating">
-                              <a href="#"><span class="fa fa-star"></span></a
-                              ><a href="#"><span class="fa fa-star"></span></a
-                              ><a href="#"><span class="fa fa-star"></span></a
-                              ><a href="#"><span class="fa fa-star"></span></a
-                              ><a href="#"><span class="fa fa-star"></span></a>
+
+                          <form method="post" id="reviewSubmitForm">
+                            <div class="rating-box">
+                              <div class="form-group">
+                                <label>Rating*</label>
+                                <select id="reviewRating" required>
+                                  <option value="5">★★★★★</option>
+                                  <option value="4">★★★★</option>
+                                  <option value="3">★★★</option>
+                                  <option value="2">★★</option>
+                                  <option value="1">★</option>
+                                </select>
+                              </div>
                             </div>
-                          </div>
-                          <form method="post" action="contact.html">
+
                             <div class="form-group">
                               <label>Your Review*</label>
                               <textarea
-                                name="message"
+                                name="review"
+                                id="reviewText"
+                                required
                                 placeholder=""
                               ></textarea>
                             </div>
@@ -762,7 +768,8 @@
                               <label>Name</label>
                               <input
                                 type="text"
-                                name="username"
+                                name="name"
+                                id="reviewName"
                                 placeholder=""
                                 required
                               />
@@ -770,17 +777,18 @@
                             <div class="form-group">
                               <label>Email</label>
                               <input
-                                type="text"
-                                name="number"
-                                placeholder=""
+                                type="email"
+                                name="email"
+                                id="reviewEmail"
                                 required
+                                placeholder=""
                               />
                             </div>
+
                             <div class="form-group">
                               <button
                                 class="theme-btn btn-style-two"
                                 type="submit"
-                                name="submit-form"
                               >
                                 Submit now
                               </button>
@@ -1203,6 +1211,112 @@
         const initialTotal = basePrice; // 1186.99
         updatePriceDisplay(initialTotal);
       });
+    </script>
+
+    <!--Reviews Data Handling-->
+    <script>
+      const scriptURL =
+        "https://script.google.com/macros/s/AKfycbwkY8ICslJLJLoGzCAchlbDwk-8hxgqdvjBxs_Z_JOXhON_PzvDBYllv8LCemfMpMKpFQ/exec";
+
+      document
+        .getElementById("reviewSubmitForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const btn = e.target.querySelector('button[type="submit"]');
+          btn.disabled = true;
+          btn.textContent = "Submitting…";
+
+          const name = document.getElementById("reviewName").value.trim();
+          const email = document.getElementById("reviewEmail").value.trim();
+          const review = document.getElementById("reviewText").value.trim();
+          const rating = parseInt(
+            document.getElementById("reviewRating").value,
+            10
+          );
+
+          const payload = { name, email, review, rating };
+
+          try {
+            const res = await fetch(scriptURL, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            });
+
+            // Try to parse JSON regardless, but handle non-200s
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok || data?.ok === false)
+              throw new Error(data?.error || `HTTP ${res.status}`);
+
+            appendReviewToPage({
+              name,
+              date: new Date().toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              }),
+              review,
+              rating,
+            });
+
+            // bump counts
+            const tabBtn = document.querySelector(
+              'li[data-tab="#prod-reviews"]'
+            );
+            if (tabBtn) {
+              const m = tabBtn.textContent.match(/\d+/);
+              if (m) tabBtn.textContent = `REVIEWS (${parseInt(m[0], 10) + 1})`;
+            }
+            const countSpan = document.querySelector(".details-header .review");
+            if (countSpan) {
+              const m = countSpan.textContent.match(/\d+/);
+              if (m)
+                countSpan.textContent = `( ${
+                  parseInt(m[0], 10) + 1
+                } Customer Reviews )`;
+            }
+
+            document.getElementById("reviewSubmitForm").reset();
+            alert("✅ Review submitted!");
+            // optional: scroll to top of reviews so they see it
+            document
+              .getElementById("reviewsContainer")
+              ?.scrollIntoView({ behavior: "smooth", block: "start" });
+          } catch (err) {
+            console.error(err);
+            alert("❌ Failed to submit review.");
+          } finally {
+            btn.disabled = false;
+            btn.textContent = "Submit now";
+          }
+        });
+    </script>
+
+    <script>
+      function appendReviewToPage({ name, date, review, rating }) {
+        const container = document.getElementById("reviewsContainer");
+        const stars = '<span class="fa fa-star"></span>'.repeat(
+          Math.max(1, Math.min(5, rating || 0))
+        );
+
+        const html = `
+      <article class="review-box clearfix">
+        <figure class="rev-thumb">
+          <img src="images/resource/rev1.png" alt="" />
+        </figure>
+        <div class="rev-content">
+          <div class="rev-info">
+            <span>${name}</span> ${date}
+          </div>
+          <div class="rating">${stars}</div>
+          <div class="rev-text"><p>${review}</p></div>
+        </div>
+      </article>
+    `;
+
+        container.insertAdjacentHTML("afterbegin", html);
+      }
     </script>
 
     <script>
