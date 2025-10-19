@@ -164,6 +164,9 @@
 
       gtag("config", "G-69W735JRRQ");
     </script>
+
+    <!-- Google CAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </head>
 
   <body>
@@ -1678,7 +1681,16 @@
                       />
                     </div>
 
-                    <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                    <div
+                      class="col-lg-12 col-md-12 col-sm-12 form-group text-center"
+                    >
+                      <!-- reCAPTCHA widget -->
+                      <div
+                        class="g-recaptcha"
+                        data-sitekey="6LexA_ArAAAAAAehwS-x5r_hhl-euW0lOmw1DdAk"
+                        style="display: inline-block; margin-bottom: 15px"
+                      ></div>
+                      <br />
                       <button type="submit">Submit</button>
                     </div>
                   </div>
