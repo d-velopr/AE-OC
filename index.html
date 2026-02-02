@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -1611,6 +1611,26 @@
                 <div class="col-lg-6 col-md-12 col-sm-12 form-group pull-right">
                   <textarea name="message" placeholder="*Message"></textarea>
                 </div>
+                <div
+                  style="
+                    display: none !important;
+                    visibility: hidden;
+                    position: absolute;
+                    left: -9999px;
+                    height: 0;
+                    overflow: hidden;
+                  "
+                >
+                  <label for="honeypot">Leave this empty if you're human</label>
+                  <input
+                    type="text"
+                    name="honeypot"
+                    id="honeypot"
+                    value=""
+                    autocomplete="off"
+                    tabindex="-1"
+                  />
+                </div>
 
                 <div class="col-lg-6 col-md-12 col-sm-12">
                   <div class="row clearfix">
@@ -1672,8 +1692,61 @@
             document
               .getElementById("contact-form")
               .addEventListener("submit", function (e) {
-                e.preventDefault();
+                e.preventDefault(); // Always prevent default (no page reload)
 
+                // === Spam + Honeypot Check ===
+                const messageField = document.querySelector(
+                  'textarea[name="message"]',
+                );
+                if (!messageField) {
+                  alert("Error: Message field not found.");
+                  return;
+                }
+
+                const msg = messageField.value.toLowerCase().trim();
+
+                const blockedPhrases = [
+                  "virtual assistants",
+                  "virtual assistant",
+                  "prospecting",
+                  "drip campaigns",
+                  "drip campaign",
+                  "appointment setting",
+                  "appointments",
+                  "set appointments", // Added these back!
+                  "fill your calendar",
+                  "calendar with high-quality meetings",
+                  "high-quality meetings",
+                  "quality meetings",
+                  "would you be open to exploring",
+                  "open to exploring",
+                  "how we can support you",
+                  "explore how we can",
+                  "we provide virtual assistants",
+                  "advanced ai-driven prospecting", // Extra common ones
+                ];
+
+                const isSpam = blockedPhrases.some((phrase) =>
+                  msg.includes(phrase),
+                );
+
+                const honeypot = document.querySelector(
+                  'input[name="honeypot"]',
+                );
+                const isHoneypotFilled =
+                  honeypot && honeypot.value.trim() !== "";
+
+                if (isSpam || isHoneypotFilled) {
+                  if (isSpam) {
+                    alert(
+                      "Sorry, promotional or sales messages aren't accepted via this form. Thanks for understanding!",
+                    );
+                  }
+                  // Honeypot failures are silent (bots don't see alert)
+                  return; // Stop here - no fetch
+                }
+
+                // === If clean, proceed to submit to Google Sheets ===
                 const formData = new FormData(this);
 
                 fetch(
@@ -1681,14 +1754,19 @@
                   {
                     method: "POST",
                     body: formData,
-                  }
+                  },
                 )
                   .then((response) => response.text())
                   .then((data) => {
                     alert("Form Submitted Successfully!");
                     document.getElementById("contact-form").reset();
                   })
-                  .catch((error) => console.error("Error:", error));
+                  .catch((error) => {
+                    console.error("Error:", error);
+                    alert(
+                      "There was an error submitting the form. Please try again.",
+                    );
+                  });
               });
           </script>
           <!-- /JS script for google spreadsheets -->
