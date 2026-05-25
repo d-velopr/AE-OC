@@ -14278,3 +14278,13 @@ button:focus{
 .color-palate{
 	display:none;
 }
+
+.inline-block-slatt {
+  display: inline-block;  /* container shrink-wraps content & sits inline */
+
+}
+.list-style-slatt {
+  display: inline-block;  /* lists horizontal */
+  margin-right: 20px;
+  vertical-align: top;
+}
