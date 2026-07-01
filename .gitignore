@@ -1,0 +1,5 @@
+
+# secrets (added by tg6-soc 2026-06-28)
+.env
+.env.*
+!.env.example
