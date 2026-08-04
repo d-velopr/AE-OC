@@ -112,6 +112,50 @@
       ]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script
     ><![endif]-->
     <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+
+    <!--
+      Course page readability: the theme defaults to 14px #777, which is small
+      and below WCAG AA contrast. This audience skews older, so body copy on
+      this page is bumped to 17px and darkened to #333 (12.6:1). Scoped to
+      .course-readable so no other page is affected.
+    -->
+    <style>
+      .course-readable p {
+        font-size: 17px;
+        line-height: 1.8;
+        color: #333333;
+      }
+      .course-readable .list-style-one li {
+        font-size: 17px;
+        line-height: 1.75;
+        color: #333333;
+        margin-bottom: 8px;
+      }
+      .course-readable .sec-title .text {
+        font-size: 18px;
+        line-height: 1.8;
+        color: #333333;
+      }
+      .course-readable h3 {
+        font-size: 30px;
+      }
+      .course-readable h4 {
+        font-size: 22px;
+      }
+      .course-readable h5 {
+        font-size: 19px;
+      }
+      .course-readable .theme-btn {
+        font-size: 17px;
+        padding: 16px 34px;
+      }
+      @media (max-width: 767px) {
+        .course-readable p,
+        .course-readable .list-style-one li {
+          font-size: 16px;
+        }
+      }
+    </style>
   </head>
 
   <body>
@@ -260,8 +304,24 @@
                                 </li>
                               </ul>
                             </div>
+                            <div class="column col-md-4 col-sm-4 col-xs-12">
+                              <h3>Upcoming Events</h3>
+                              <ul>
+                                <li>
+                                  <a href="fabClass.html#class">3-Day Digital Fabrication Class (Sep 11–13, 2026)</a>
+                                </li>
+                              </ul>
+                            </div>
                           </div>
                         </div>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#">Training</a>
+                        <ul>
+                          <li>
+                            <a href="fabClass.html#class">3-Day Digital Fabrication Class (Sep 11–13, 2026)</a>
+                          </li>
+                        </ul>
                       </li>
                       <li><a href="contact.html">Contact</a></li>
                     </ul>
@@ -427,8 +487,24 @@
                               </li>
                             </ul>
                           </div>
+                          <div class="column col-md-4 col-sm-4 col-xs-12">
+                            <h3>Upcoming Events</h3>
+                            <ul>
+                              <li>
+                                <a href="fabClass.html#class">3-Day Digital Fabrication Class (Sep 11–13, 2026)</a>
+                              </li>
+                            </ul>
+                          </div>
                         </div>
                       </div>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#">Training</a>
+                      <ul>
+                        <li>
+                          <a href="fabClass.html#class">3-Day Digital Fabrication Class (Sep 11–13, 2026)</a>
+                        </li>
+                      </ul>
                     </li>
                     <li><a href="contact.html">Contact</a></li>
                   </ul>
@@ -460,20 +536,18 @@
       <!--End Page Title-->
 
       <!-- Course Details -->
-      <div class="appointment-page" style="padding-bottom: 70px">
+      <div
+        class="appointment-page course-readable"
+        style="padding-bottom: 70px"
+      >
         <div class="auto-container">
           <!-- Overview -->
           <div class="sec-title" style="text-align: center; margin-bottom: 35px">
-            <img
-              src="images/IMG_3110.jpeg"
-              alt="Digital Fabrication Training"
-              style="width: 100%; border-radius: 12px; margin-bottom: 30px"
-            />
             <h2 style="color: #010101">Digital Fabrication Training</h2>
             <div class="text" style="max-width: 820px; margin: 14px auto 0">
-              A digital fabrication workflow for building complete high-end sound
-              systems in modern vehicles using real production methods — from 3D
-              scan data to engineered, install-ready components.
+              From 3D scanning to bringing actual parts to life — a hands-on
+              workflow for capturing real vehicle geometry and turning it into
+              engineered, install-ready components.
             </div>
           </div>
 
@@ -488,77 +562,127 @@
               margin-bottom: 45px;
             "
           >
-            <strong style="font-size: 18px"
-              >3-Day Digital Fabrication Class &nbsp;·&nbsp; $1,295</strong
+            <strong style="font-size: 21px; line-height: 1.5"
+              >3-Day Digital Fabrication Class &nbsp;·&nbsp; September 11–13,
+              2026 &nbsp;·&nbsp; $1,295</strong
             >
           </div>
 
-          <!-- ===== 3-Day Class ===== -->
+          <div class="row clearfix">
+            <!-- Flyer Column -->
+            <div
+              class="image-column col-lg-4 col-md-12 col-sm-12"
+              style="margin-bottom: 30px"
+            >
+              <img
+                src="images/digital-fabrication-sep-2026.png"
+                alt="Digital Fabrication 3-Day Class — September 11–13, 2026"
+                style="
+                  width: 100%;
+                  max-width: 520px;
+                  border-radius: 12px;
+                  display: block;
+                  margin: 0 auto;
+                "
+              />
+            </div>
+
+            <!-- ===== 3-Day Class ===== -->
+            <div class="content-column col-lg-8 col-md-12 col-sm-12">
+              <div
+                id="class"
+                style="
+                  border: 1px solid #ececf1;
+                  border-radius: 12px;
+                  padding: 34px;
+                  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+                "
+              >
+                <h3 style="color: #010101; margin-bottom: 8px">
+                  3-Day Digital Fabrication Class
+                </h3>
+                <p
+                  style="
+                    color: #ed0000;
+                    font-weight: 700;
+                    font-size: 19px;
+                    margin-bottom: 14px;
+                  "
+                >
+                  📅 September 11–13, 2026 &nbsp;·&nbsp; 📍 Huntington Beach, CA
+                  &nbsp;·&nbsp; $1,295
+                </p>
+                <p
+                  style="
+                    color: #010101;
+                    font-weight: 700;
+                    font-size: 19px;
+                    margin-bottom: 18px;
+                  "
+                >
+                  🕘 Check-in 9:30 AM &nbsp;·&nbsp; Class starts 10:00 AM
+                </p>
+                <p>
+                  <strong>From 3D Scanning To Bringing Actual Parts To Life.</strong>
+                  This hands-on training focuses on the front half of the digital
+                  fabrication workflow — capturing real vehicle geometry and turning
+                  it into accurate, buildable CAD. You'll work through 3D scanning,
+                  reverse engineering, and surfacing using the same processes we use
+                  every day in our shop. This is not a theory class — every step is
+                  focused on real-world application and execution.
+                </p>
+
+                <h4 style="color: #010101; margin: 26px 0 14px">
+                  What You'll Learn
+                </h4>
+                <div class="row clearfix">
+                  <div class="column col-md-6 col-sm-12" style="margin-bottom: 18px">
+                    <h5 style="color: #ed0000">3D Scanning</h5>
+                    <ul class="list-style-one clearfix">
+                      <li>Capture vehicle geometry using 3D scanning</li>
+                      <li>Scanner setup, coverage &amp; scan quality</li>
+                      <li>Clean up and align raw scan data</li>
+                    </ul>
+                  </div>
+                  <div class="column col-md-6 col-sm-12" style="margin-bottom: 18px">
+                    <h5 style="color: #ed0000">Reverse Engineering</h5>
+                    <ul class="list-style-one clearfix">
+                      <li>Turn scan meshes into accurate CAD</li>
+                      <li>Establish reference geometry from a scan</li>
+                      <li>Build dimensionally correct, buildable models</li>
+                    </ul>
+                  </div>
+                  <div class="column col-md-6 col-sm-12" style="margin-bottom: 18px">
+                    <h5 style="color: #ed0000">Surfacing</h5>
+                    <ul class="list-style-one clearfix">
+                      <li>Rebuild complex, organic shapes from scan data</li>
+                      <li>Surface continuity and clean transitions</li>
+                      <li>Panels that follow real vehicle contours</li>
+                    </ul>
+                  </div>
+                  <div class="column col-md-6 col-sm-12" style="margin-bottom: 18px">
+                    <h5 style="color: #ed0000">Real-World Workflows</h5>
+                    <ul class="list-style-one clearfix">
+                      <li>Shop-proven process from scan to finished part</li>
+                      <li>Working in Fusion 360 end to end</li>
+                      <li>Taking a model through to an install-ready component</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== Process, Details & Registration (full width) ===== -->
           <div
-            id="class"
             style="
               border: 1px solid #ececf1;
               border-radius: 12px;
               padding: 34px;
               box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+              margin-top: 30px;
             "
           >
-            <h3 style="color: #010101; margin-bottom: 8px">
-              3-Day Digital Fabrication Class
-            </h3>
-            <p style="color: #ed0000; font-weight: 600; margin-bottom: 18px">
-              📅 July 24–26, 2026 &nbsp;·&nbsp; 📍 Huntington Beach, CA
-              &nbsp;·&nbsp; $1,295
-            </p>
-            <p>
-              <strong>Modern Vehicle Integration Workflow.</strong> This
-              hands-on training teaches a complete digital fabrication workflow
-              for modern vehicle integration using the same processes we use
-              every day in our shop. You'll learn how 3D scanning, CAD design,
-              laser cutting, CNC machining, and 3D printing work together to
-              create accurate, repeatable, and professional vehicle
-              installations. This is not a theory class — every step is focused
-              on real-world application and execution.
-            </p>
-
-            <h4 style="color: #010101; margin: 26px 0 14px">
-              What You'll Learn
-            </h4>
-            <div class="row clearfix">
-              <div class="column col-md-6 col-sm-12" style="margin-bottom: 18px">
-                <h5 style="color: #ed0000">Scan</h5>
-                <ul class="list-style-one clearfix">
-                  <li>Capture vehicle data using 3D scanning</li>
-                  <li>Prepare scan files for production</li>
-                </ul>
-              </div>
-              <div class="column col-md-6 col-sm-12" style="margin-bottom: 18px">
-                <h5 style="color: #ed0000">Design</h5>
-                <ul class="list-style-one clearfix">
-                  <li>Design components in Fusion 360</li>
-                  <li>Create production-ready parts from scan data</li>
-                </ul>
-              </div>
-              <div class="column col-md-6 col-sm-12" style="margin-bottom: 18px">
-                <h5 style="color: #ed0000">Fabricate</h5>
-                <ul class="list-style-one clearfix">
-                  <li>Laser cutting workflow</li>
-                  <li>CNC machining techniques</li>
-                  <li>3D printing applications</li>
-                </ul>
-              </div>
-              <div class="column col-md-6 col-sm-12" style="margin-bottom: 18px">
-                <h5 style="color: #ed0000">Integrate</h5>
-                <ul class="list-style-one clearfix">
-                  <li>Aluminum fuse holder bracket</li>
-                  <li>Speaker adapters &amp; block-out plates</li>
-                  <li>Amplifier rack fabrication</li>
-                  <li>Under-seat subwoofer enclosure</li>
-                  <li>DSP controller integration</li>
-                </ul>
-              </div>
-            </div>
-
             <p
               style="
                 text-align: center;
@@ -568,10 +692,10 @@
                 background: #f7f7f9;
                 border-radius: 8px;
                 padding: 14px;
-                margin: 10px 0 24px;
+                margin: 0 0 24px;
               "
             >
-              SCAN → DESIGN → PROTOTYPE → FABRICATE → INSTALL
+              SCAN → REVERSE ENGINEER → SURFACE → REAL PARTS
             </p>
 
             <div class="row clearfix">
@@ -580,8 +704,7 @@
                   What's Included
                 </h4>
                 <ul class="list-style-one clearfix">
-                  <li>Special guest appearance — learn from industry pros</li>
-                  <li>Lunch &amp; snacks provided</li>
+                  <li>Lunch, snacks &amp; coffee provided all three days</li>
                   <li>Networking with fabricators &amp; enthusiasts</li>
                 </ul>
               </div>
@@ -598,22 +721,23 @@
               </div>
             </div>
 
-            <p style="color: #555; margin-top: 6px">
-              By the end of the class, you'll understand how to take a vehicle
-              from raw scan data to engineered, install-ready components using a
-              structured digital fabrication process.
-            </p>
+            <div style="text-align: center; margin-top: 10px">
+              <p style="color: #333333; max-width: 760px; margin: 0 auto 22px">
+                By the end of the class, you'll understand how to take a vehicle
+                from raw scan data to engineered, install-ready components using
+                a structured digital fabrication process.
+              </p>
 
-            <a
-              href="https://buy.stripe.com/00w00j0bM2280Dj8eM8k801"
-              target="_blank"
-              class="theme-btn btn-style-one"
-              style="margin-top: 12px"
-              >Register — 3-Day Class · $1,295</a
-            >
-            <p style="margin-top: 14px; font-size: 14px; color: #888">
-              🔒 Secure checkout powered by Stripe.
-            </p>
+              <a
+                href="https://buy.stripe.com/00w00j0bM2280Dj8eM8k801"
+                target="_blank"
+                class="theme-btn btn-style-one"
+                >Register — 3-Day Class · Sep 11–13 · $1,295</a
+              >
+              <p style="margin-top: 16px; font-size: 15px; color: #555555">
+                🔒 Secure checkout powered by Stripe.
+              </p>
+            </div>
           </div>
         </div>
       </div>
